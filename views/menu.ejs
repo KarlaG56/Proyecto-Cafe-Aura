@@ -34,6 +34,8 @@ https://templatemo.com/tm-558-klassy-cafe
 
     <link rel="stylesheet" href="resources/css/lightbox.css">
 
+
+    <link rel="stylesheet" href="resources/css/plantilla.css">
 </head>
 
 <body>
@@ -99,7 +101,987 @@ https://templatemo.com/tm-558-klassy-cafe
                 <div class="col-lg-4 offset-lg-4 text-center">
                     <div class="section-heading">
                         <!-- <h6>Klassy Week</h6> -->
+                        
+                        <label for="site-search"><h2>¿Buscaba algo en especial?</h2></label>
+                        <input type="search" id="buscar" name="q">
+                        
+                        <button onclick="BT()">Buscar</button>
+                        <h1 id="funcion"></h1>
                         <h2>Ofertas especiales de la semana</h2>
+                        <script>
+                        function BT(){
+                        class BinarySearchTree {
+                            constructor() {
+                               // Initialize a root element to null.
+                               this.root = null;
+                            }
+                            insertIter(data) {
+                               let node = new this.Node(data);
+                         
+                            // Check if the tree is empty
+                            if (this.root === null) {
+                               // Insert as the first element
+                               this.root = node;
+                               return;
+                            }
+                            let currNode = this.root;
+                            while (true) {
+                            if (data < currNode.data) {
+                               // Set the value here as we've reached a leaf node
+                               if (currNode.left === null) {
+                                  currNode.left = node;
+                                     break;
+                                  } else {
+                                     currNode = currNode.left;
+                                  }
+                               } else {
+                                  // Set the value here as we've reached a leaf node
+                                  if (currNode.right === null) {
+                                     currNode.right = node;
+                                     break;
+                                  } else {
+                                     currNode = currNode.right;
+                                  }
+                               }
+                            }
+                         }
+                         insertRec(data) {
+                            let node = new this.Node(data);
+                         
+                            // Check if the tree is empty
+                            if (this.root === null) {
+                               // Insert as the first element
+                               this.root = node;
+                            } else {
+                               insertRecHelper(this.root, node);
+                            }
+                         }
+                         searchIter(data) {
+                            let currNode = this.root;
+                         
+                            while (currNode !== null) {
+                               if (currNode.data === data) {
+                         
+                               // Found the element!
+                               return true;
+                            } else if (data < currNode.data) {
+                         
+                               // Go Left as data is smaller than parent
+                               currNode = currNode.left;
+                            } else {
+                         
+                               // Go right as data is greater than parent
+                               currNode = currNode.right;
+                            }
+                         }
+                         return false;
+                         }
+                         searchRec(data) {
+                            return searchRecHelper(data, this.root);
+                         }
+                         getMinVal() {
+                            if (this.root === null) {
+                            throw "Empty tree!";
+                         }
+                         let currNode = this.root;
+                         
+                         while (currNode.left !== null) {
+                               currNode = currNode.left;
+                            }
+                         return currNode.data;
+                         }
+                         getMaxVal() {
+                            if (this.root === null) {
+                               throw "Empty tree!";
+                            }
+                            let currNode = this.root;
+                         
+                            while (currNode.right !== null) {
+                               currNode = currNode.right;
+                            }
+                            return currNode.data;
+                         }
+                         deleteNode(key) {
+                            return !(deleteNodeHelper(this.root, key) === false);
+                         }
+                         inOrder() {
+                            inOrderHelper(this.root);
+                         }
+                         preOrder() {
+                            preOrderHelper(this.root);
+                         }
+                         postOrder() {
+                            postOrderHelper(this.root);
+                         }
+                         }
+                         
+                         BinarySearchTree.prototype.Node = class {
+                            constructor(data, left = null, right = null) {
+                               this.data = data;
+                               this.left = left;
+                               this.right = right;
+                            }
+                         };
+                         
+                         // HELPER METHODS
+                         function preOrderHelper(root) {
+                            if (root !== null) {
+                               console.log(root.data);
+                               preOrderHelper(root.left);
+                               preOrderHelper(root.right);
+                            }
+                         }
+                         function inOrderHelper(root) {
+                            if (root !== null) {
+                               inOrderHelper(root.left);
+                               console.log(root.data);
+                               inOrderHelper(root.right);
+                            }
+                         }
+                         
+                         function postOrderHelper(root) {
+                            if (root !== null) {
+                               postOrderHelper(root.left);
+                               postOrderHelper(root.right);
+                            console.log(root.data);
+                            }
+                         }
+                         
+                         function insertRecHelper(root, node) {
+                            if (node.data < root.data) {
+                         
+                               // Set the value here as we've reached a leaf node
+                               if (root.left === null) {
+                                  root.left = node;
+                               } else {
+                                  insertRecHelper(root.left, node);
+                               }
+                            } else {
+                               // Set the value here as we've reached a leaf node
+                               if (root.right === null) {
+                                  root.right = node;
+                               } else {
+                                  insertRecHelper(root.right, node);
+                               }
+                            }
+                         }
+                         
+                         function searchRecHelper(data, root) {
+                            if (root === null) {
+                               // Reached leaf but didn't find it.
+                               return false;
+                            }
+                            if (data < root.data) {
+                               return searchRecHelper(data, root.left);
+                         } else if (data > root.data) {
+                               return searchRecHelper(data, root.right);
+                            }
+                            // This means element is found return true;
+                         }
+                    
+                         
+                         function deleteNodeHelper(root, key) {
+                         if (root === null) {
+                         // Empty tree return false;
+                         }
+                         
+                         if (key < root.data) {
+                         root.left = deleteNodeHelper(root.left, key);
+                         return root;
+                         } else if (key > root.data) {
+                         root.right = deleteNodeHelper(root.right, key);
+                         return root;
+                         } else {
+                         // No children
+                         //case 1 - a leaf node
+                         if (root.left === null && root.right === null) {
+                         root = null;
+                         return root;
+                         }
+                         
+                         // Single Child cases
+                         if (root.left === null) return root.right;
+                         if (root.right === null) return root.left;
+                         
+                         // Both children, so need to find successor
+                         let currNode = root.right;
+                         
+                         while (currNode.left !== null) {
+                         currNode = currNode.left;
+                         } root.data = currNode.data;
+                         
+                         // Delete the value from right subtree.
+                         root.right = deleteNodeHelper(root.right, currNode.data);
+                         return root;
+                         }
+                         }
+                         
+                         let BST = new BinarySearchTree();
+                       //   BST.insertIter("A");
+                         BST.insertIter("CAFE");
+                         BST.insertIter("CAFÉ");
+                         BST.insertIter("CAFE EXPRESSO");
+                         BST.insertIter("CAFÉ EXPRESSO"); 
+                         BST.insertIter("CAFE MOCA");
+                         BST.insertIter("CAFÉ MOCA");
+                         BST.insertIter("CAFE CON LECHE");
+                         BST.insertIter("CAFÉ CON LECHE");
+                         BST.insertIter("CAFE AMERICANO");
+                         BST.insertIter("CAFÉ AMERICANO");
+                         BST.insertIter("CAFE CON HIELO");
+                         BST.insertIter("CAFÉ CON HIELO");
+                         BST.insertIter("CAFE DESCAFEINADO");
+                         BST.insertIter("CAFÉ DESCAFEINADO");
+                         BST.insertIter("TE");
+                         BST.insertIter("TÉ");
+                         BST.insertIter("CHOCOLATE CALIENTE");
+                         BST.insertIter("FRAPPE");
+                         BST.insertIter("FRAPPÉ");
+                         BST.insertIter("CAPPUCCINO");
+                         BST.insertIter("LATTE MACCHIATO");
+                         BST.insertIter("CHOCOLATE FRIO");
+                         BST.insertIter("CHOCOLATE FRÍO");
+                         BST.insertIter("SMOOTHIE");
+                         BST.insertIter("SANDWICH");
+                         BST.insertIter("SÁNDWICH");
+                         BST.insertIter("HELADO");
+                         BST.insertIter("BROWNIE");
+                         BST.insertIter("CUPCAKE");
+                         BST.insertIter("GALLETA");
+                         BST.insertIter("GALLETAS");
+                         // console.log(BST.searchIter("C"));
+                         buscar = document.getElementById("buscar").value;
+                         buscarr = buscar.toUpperCase()
+                         if(BST.searchIter(buscarr) == true){
+                            // console.log('Se ha encontrado su resultado');
+                            let resultado = "Se ha encontrado su resultado";
+                            document.getElementById("funcion").innerHTML = resultado;
+                            if(buscarr == "CAFE" || buscarr == "CAFÉ"){
+                                // let resultados = "Se ha encontrado " + " &quot;" + buscar + "&quot;";
+                                // let resultados = (`Hola ${nombre}, bienvenido al sitio.`);
+                                let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-07.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$20.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café moca</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-09.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café con Leche</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-10.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café americano</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café expresso</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$20.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-13.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café con hielo</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-12.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café descafeinado</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$30.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+                                document.getElementById("funcion").innerHTML = resultados;
+                            }else{
+                                if(buscarr == "CAFE EXPRESSO" || buscarr == "CAFÉ EXPRESSO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café expresso</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$20.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CAFE MOCA" || buscarr == "CAFÉ MOCA"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café moca</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CAFE CON LECHE" || buscarr == "CAFÉ CON LECHE"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café con Leche</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CAFE AMERICANO" || buscarr == "CAFÉ AMERICANO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café Americano</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CAFE CON HIELO" || buscarr == "CAFÉ CON HIELO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café con Hielo</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CAFE DESCAFEINADO" || buscarr == "CAFÉ DESCAFEINADO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Café Descafeinado</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$30.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "TE" || buscarr == "TÉ"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-08.jpg" alt="">
+                                                            <br>
+                                                            <h4>Té</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$25.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CHOCOLATE CALIENTE"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-10.jpg" alt="">
+                                                            <br>
+                                                            <h4>Chocolate Caliente</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$30.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "FRAPPE" || buscarr == "FRAPPÉ"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Frappé</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$35.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CAPPUCCINO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Cappuccino</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$35.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "LATTE MACCHIATO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Late Macchiato</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$40.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CHOCOLATE FRIO" || buscarr == "CHOCOLATE FRÍO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Chocolate Frío</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$35.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "SMOOTHIE"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Smoothie</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$3x|0.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "SANDWICH" || buscarr == "SÁNDWICH"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Sándwich</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$35.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "HELADO"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Helado</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$30.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "BROWNIE"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Brownie</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$30.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "CUPCAKE"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Cupcake</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$20.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }else{
+                                    if(buscarr == "GALLETAS" || buscarr == "GALLETA"){
+                                    let resultados = (`<div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="tabs">
+                        <div class="col-lg-12">
+                            <section class='tabs-content'>
+                                <article id='tabs-1'>
+                                    <div class="row">
+                                            <div class="row">
+                                                <div class="left-list">
+                                                    <div class="col-lg-12">
+                                                        <div class="tab-item">
+                                                            <img src="resources/images/tab-item-11.jpg" alt="">
+                                                            <br>
+                                                            <h4>Galletas</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing
+                                                                elit, sed do.</p>
+                                                            <div class="price">
+                                                                <h6>$20.00</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>  
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+            document.getElementById("funcion").innerHTML = resultados;
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }
+                            }
+                         }else{
+                            // console.log('No se ha encontrado nada');
+                            let resultado = "No se ha encontrado " + "&quot;" + buscar + "&quot;";
+                            document.getElementById("funcion").innerHTML = resultado;
+                         }
+                        }
+                         </script>
                     </div>
                 </div>
             </div>
@@ -425,7 +1407,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="item">
                         <div class='card card1'>
                             <div class="price">
-                                <h6>$14</h6>
+                                <h6>$110.00</h6>
                             </div>
                             <div class='info'>
                                 <h1 class='title'>Pastel de chocolate</h1>
@@ -441,7 +1423,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="item">
                         <div class='card card2'>
                             <div class="price">
-                                <h6>$22</h6>
+                                <h6>$50.00</h6>
                             </div>
                             <div class='info'>
                                 <h1 class='title'>Pastel aura</h1>
@@ -457,7 +1439,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="item">
                         <div class='card card3'>
                             <div class="price">
-                                <h6>$18</h6>
+                                <h6>$30.00</h6>
                             </div>
                             <div class='info'>
                                 <h1 class='title'>Pan Aura</h1>
@@ -473,7 +1455,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="item">
                         <div class='card card4'>
                             <div class="price">
-                                <h6>$10</h6>
+                                <h6>$60.00</h6>
                             </div>
                             <div class='info'>
                                 <h1 class='title'>CheeseCake</h1>
@@ -489,7 +1471,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="item">
                         <div class='card card5'>
                             <div class="price">
-                                <h6>$8.50</h6>
+                                <h6>$25.00</h6>
                             </div>
                             <div class='info'>
                                 <h1 class='title'>Aura Cup Cake</h1>
@@ -505,7 +1487,7 @@ https://templatemo.com/tm-558-klassy-cafe
                     <div class="item">
                         <div class='card card3'>
                             <div class="price">
-                                <h6>$7.25</h6>
+                                <h6>$40.00</h6>
                             </div>
                             <div class='info'>
                                 <h1 class='title'>Torta aura</h1>
