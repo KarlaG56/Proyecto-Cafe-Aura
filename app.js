@@ -84,6 +84,20 @@ app.get('/reservacion', (req, res)=>{
         })
     }
 })
+
+app.get('/compra', (req, res)=>{
+    if(req.session.loggedin){
+        res.render('compra',{
+            login:true,
+            name: req.session.name
+        });
+    }else{
+        res.render('compra',{
+            login: false,
+            name: 'Debe iniciar sesión'
+        })
+    }
+})
 app.get('/servicio', (req, res)=>{
     if(req.session.loggedin){
         res.render('servicio',{
@@ -118,6 +132,9 @@ app.get('/reserva', (req, res)=>{
 })
 app.get('/confirm', (req, res)=>{
     res.render('confirm');
+})
+app.get('/confirmcompra', (req, res)=>{
+    res.render('confirmcompra');
 })
 app.post('/register',async(req, res)=>{
 const user = req.body.user;
@@ -166,6 +183,29 @@ app.post('/reservacion',async(req, res)=>{
         }
     })
     })
+    app.post('/compra',async(req, res)=>{
+        const ListaProductos = req.body.ListaProductos;
+        const NumeroTelefonico = req.body.NumeroTelefonico;
+        const Direccion = req.body.Direccion;
+        const Cantidad = req.body.Cantidad;
+        const Mensaje = req.body.Mensaje;
+        const nombre = req.body.nombre;
+        connection.query('INSERT INTO compra SET ?', {ListaProductos:ListaProductos, NumeroTelefonico:NumeroTelefonico, Direccion:Direccion, Cantidad:Cantidad,Mensaje:Mensaje,nombre:nombre },async(error, results)=>{
+            if(error){
+                console.log(error);
+            }else{
+                res.render('confirmcompra',{
+                    alert: true,
+                    alertTitle:"Estado del registro",
+                    alertMessage: "Reservación exitosa!",
+                    alertIcon:'success',
+                    showConfirmButton:false,
+                    timer:1500,
+                    ruta:'confirmcompra'
+                })
+            }
+        })
+        })
 
     app.post('/reserv', async(req,res)=>{
         const mesas = req.body.mesas;
