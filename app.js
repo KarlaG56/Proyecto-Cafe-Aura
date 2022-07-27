@@ -1,11 +1,14 @@
 const express = require ('express');
 const app = express();
-
+app.set('view engine','ejs');
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 const dotenv = require('dotenv');
 dotenv.config({path:'./env/.env'})
+
+app.use('/', require('./router'));
+
 
 app.use('/resources', express.static('public'));
 app.use('/resources', express.static(__dirname + '/public'));
@@ -28,6 +31,18 @@ const connection = require('./database/db');
 
 app.get('/login', (req, res)=>{
     res.render('login');
+})
+app.get('/indexs', (req, res)=>{
+    res.render('indexs');
+})
+app.get('/indexs2', (req, res)=>{
+    res.render('indexs2');
+})
+app.get('/edit', (req, res)=>{
+    res.render('edit');
+})
+app.get('/edit2', (req, res)=>{
+    res.render('edit2');
 })
 app.get('/register', (req, res)=>{
     res.render('register');
@@ -77,12 +92,19 @@ app.get('/reservacion', (req, res)=>{
             login:true,
             name: req.session.name
         });
-    }else{
-        res.render('reservacion',{
-            login: false,
-            name: 'Debe iniciar sesión'
-        })
-    }
+    }else {
+        if(req.session.loggedin){
+            res.render('index',{
+                login:true,
+                name: req.session.name
+            });
+        }else{
+            res.render('index',{
+                login: false,
+                name: 'Debe iniciar sesión'
+            })
+        }  
+      }
 })
 
 app.get('/compra', (req, res)=>{
@@ -92,10 +114,17 @@ app.get('/compra', (req, res)=>{
             name: req.session.name
         });
     }else{
-        res.render('compra',{
-            login: false,
-            name: 'Debe iniciar sesión'
-        })
+        if(req.session.loggedin){
+            res.render('index',{
+                login:true,
+                name: req.session.name
+            });
+        }else{
+            res.render('index',{
+                login: false,
+                name: 'Debe iniciar sesión'
+            })
+        } 
     }
 })
 app.get('/servicio', (req, res)=>{
@@ -130,8 +159,8 @@ app.get('/reserva', (req, res)=>{
         })
     }
 })
-app.get('/confirm', (req, res)=>{
-    res.render('confirm');
+app.get('/confirms', (req, res)=>{
+    res.render('confirms');
 })
 app.get('/confirmcompra', (req, res)=>{
     res.render('confirmcompra');
@@ -171,14 +200,14 @@ app.post('/reservacion',async(req, res)=>{
         if(error){
             console.log(error);
         }else{
-            res.render('confirm',{
+            res.render('confirms',{
                 alert: true,
                 alertTitle:"Estado del registro",
                 alertMessage: "Reservación exitosa!",
                 alertIcon:'success',
                 showConfirmButton:false,
                 timer:1500,
-                ruta:'confirm'
+                ruta:''
             })
         }
     })
@@ -201,7 +230,7 @@ app.post('/reservacion',async(req, res)=>{
                     alertIcon:'success',
                     showConfirmButton:false,
                     timer:1500,
-                    ruta:'confirmcompra'
+                    ruta:''
                 })
             }
         })
